@@ -97,6 +97,22 @@ Exit the workflow when the task is too small, the user will not allow essential 
 
 Split the workflow when the goal contains independent sub-goals with different acceptance criteria, owners, prototypes, or delivery paths. First align the parent goal, child workflows, ordering, shared constraints, dependencies, and the first child workflow to run.
 
+## Language Policy
+
+Default all workflow communication to the language the user is currently using, unless the user explicitly requests another language.
+
+This applies to:
+
+- Phase conversations and gate prompts.
+- Source-of-truth documents.
+- Thread prompts and worker handoffs.
+- Reviewer or specialist sub-agent context.
+- Delivery reports and user acceptance instructions.
+
+Keep stable technical identifiers unchanged, including file names, code symbols, command names, paths, API names, log excerpts, and quoted source text. Section headings in templates may be translated to the workflow language while keeping the same required meaning.
+
+If the user uses multiple languages, infer the working language from the current request and surrounding context. Ask only when the ambiguity would materially affect the deliverable.
+
 ## Phase 0: Activation
 
 Goal: decide whether to use the workflow and establish workflow-level thread authorization.
@@ -107,6 +123,7 @@ Gate:
 
 - The user explicitly asks for or approves the workflow.
 - The user understands the workflow may create threads, produce documents, and wait at key gates.
+- The workflow language is determined. Default to the user's current language unless explicitly overridden.
 - The workflow document directory is established. Default to `docs/agent-workflows/<goal-slug>/` unless the user specifies another location.
 - The lead agent judges the task suitable.
 
@@ -328,6 +345,7 @@ Before creating a thread, the lead agent must state in the main workflow:
 
 Every thread brief must be self-contained and include:
 
+- Workflow language.
 - Current workflow phase.
 - User goal and success criteria summary.
 - Relevant source-of-truth document summaries or paths.

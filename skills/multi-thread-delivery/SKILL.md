@@ -12,8 +12,9 @@ Use this skill only after the user explicitly asks for, or approves, this workfl
 1. Read `references/workflow-definition.md` before running the workflow.
 2. Read `references/templates.md` when drafting phase documents, thread prompts, worker handoffs, or gate prompts.
 3. Confirm the current workflow mode: Full, Standard, Lite, Exit, or Split.
-4. Establish the workflow document directory before Phase 1. Default to `docs/agent-workflows/<goal-slug>/` unless the user specifies another location.
-5. Do not create files, threads, or implementation work until the active phase gate allows it.
+4. Determine the workflow language. Default to the language the user is currently using unless the user explicitly requests another language.
+5. Establish the workflow document directory before Phase 1. Default to `docs/agent-workflows/<goal-slug>/` unless the user specifies another location.
+6. Do not create files, threads, or implementation work until the active phase gate allows it.
 
 ## Non-Negotiable Rules
 
@@ -25,6 +26,7 @@ Use this skill only after the user explicitly asks for, or approves, this workfl
 - Phase 6 worker threads must use relevant skills and must call the predefined reviewer sub-agent before handoff.
 - Source-of-truth documents must stay aligned with the real work. If an upstream document is wrong, return to the affected phase and re-run the needed gate.
 - Every phase must actively check and maintain upstream source-of-truth documents, not only produce its own artifact.
+- Use the workflow language for phase communication, documents, thread prompts, handoffs, reports, and gate requests unless the user explicitly asks otherwise.
 - User gates require explicit user confirmation. Do not treat silence or lack of objection as approval.
 
 ## Phase Summary
@@ -60,7 +62,7 @@ Thread and review briefs do not need to be written as separate files by default.
 
 ## Thread Brief Rules
 
-Every thread prompt must be self-contained and include the current phase, user goal, source-of-truth context, task scope, non-scope, readable context, writable boundaries, expected output, verification requirements, skill usage requirements, stopping conditions, and handoff format.
+Every thread prompt must be self-contained and include the workflow language, current phase, user goal, source-of-truth context, task scope, non-scope, readable context, writable boundaries, expected output, verification requirements, skill usage requirements, stopping conditions, and handoff format.
 
 Every thread must identify and use the minimal relevant set of available skills. In its handoff, it must report which skills it used, which obvious skills it skipped and why, and whether any skill instruction conflicted with the workflow brief.
 

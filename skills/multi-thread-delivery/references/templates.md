@@ -4,6 +4,8 @@ Use these as adaptable skeletons. Keep required content, but adjust format to th
 
 Default workflow document directory: `docs/agent-workflows/<goal-slug>/`, unless the user specifies another location.
 
+Default workflow language: the language the user is currently using, unless the user explicitly requests another language. Translate section headings and template labels to the workflow language when drafting real documents. Keep file names, paths, commands, code symbols, API names, and quoted source text unchanged when needed for precision.
+
 ## `01-problem-goal-requirements.md`
 
 ```markdown
@@ -248,6 +250,9 @@ Default workflow document directory: `docs/agent-workflows/<goal-slug>/`, unless
 ```text
 You are a bounded research/design worker thread in the Multi-Thread Delivery workflow.
 
+Workflow language:
+<user's current language unless explicitly overridden>
+
 Current phase: Phase 2, Research and Solution Design.
 
 User goal:
@@ -272,6 +277,7 @@ Skill requirement:
 Before acting, identify relevant available skills for this task. Use the minimal set that applies. Read and follow each selected SKILL.md. In your handoff, report which skills you used, which relevant skills you skipped and why, and whether any skill instruction conflicted with this workflow brief.
 
 Expected output:
+- Write the handoff in the workflow language
 - Investigation scope
 - Existing or reusable solutions investigated
 - Context collected for custom design if no suitable existing solution exists
@@ -288,6 +294,9 @@ Do not change requirements, acceptance criteria, or user-facing decisions. If th
 
 ```text
 You are a bounded prototype worker thread in the Multi-Thread Delivery workflow.
+
+Workflow language:
+<user's current language unless explicitly overridden>
 
 Current phase: Phase 4, Demo or Prototype.
 
@@ -313,6 +322,7 @@ Skill requirement:
 Before acting, identify relevant available skills for this task. Use the minimal set that applies. Read and follow each selected SKILL.md. In your handoff, report which skills you used, which relevant skills you skipped and why, and whether any skill instruction conflicted with this workflow brief.
 
 Expected output:
+- Write the handoff in the workflow language
 - Prototype/demo artifact
 - How to view or run it
 - What it validates
@@ -328,6 +338,9 @@ Stop and report if the prototype would require scope expansion or contradicts co
 
 ```text
 You are a bounded execution worker thread in the Multi-Thread Delivery workflow.
+
+Workflow language:
+<user's current language unless explicitly overridden>
 
 Current phase: Phase 6, Execution, Verification, Review.
 
@@ -362,6 +375,7 @@ Reviewer requirement:
 Before handoff, call the predefined reviewer sub-agent with the goal, requirements, selected solution, acceptance criteria, execution plan scope, actual deliverable or diff, verification already run, and known risks. Handle the findings before returning to the lead agent.
 
 Expected handoff:
+- Write the handoff in the workflow language
 - Completed work
 - Files or artifacts changed
 - Verification performed and results
@@ -407,6 +421,7 @@ Integration notes:
 
 Provide the predefined reviewer sub-agent:
 
+- Workflow language.
 - User goal.
 - Requirements.
 - Selected solution.

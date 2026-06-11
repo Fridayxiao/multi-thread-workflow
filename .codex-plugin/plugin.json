@@ -1,6 +1,6 @@
 {
   "name": "multi-thread-delivery",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Documented multi-thread workflow for complex goals, from alignment through delivery.",
   "author": {
     "name": "Local developer"
@@ -14,7 +14,7 @@
     "category": "Productivity",
     "capabilities": ["Interactive", "Write"],
     "defaultPrompt": [
-      "Use the multi-thread delivery workflow for this goal.",
+      "Use this workflow in my current language.",
       "Plan this with requirements, options, acceptance, and execution threads.",
       "Run a documented multi-thread workflow for this project."
     ]
