@@ -1,4 +1,4 @@
-# Multi-Thread Delivery Templates
+# Orchestrated Delivery Templates
 
 Use these as adaptable skeletons. Keep required content, but adjust format to the task. For Lite Mode, sections may be compressed as long as the required decisions remain explicit and durable.
 
@@ -157,10 +157,14 @@ Default workflow language: the language the user is currently using, unless the 
 ## Serial Dependencies
 
 ## Parallel Paths
-| Path | Goal | Scope | Inputs | Outputs | Validation | Stop conditions |
-| --- | --- | --- | --- | --- | --- | --- |
+| Path | Delegate type | Role | Goal | Scope | Inputs | Outputs | Validation | Stop conditions |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
-## Worker Thread Plan
+## Delegation Plan
+
+## Thread Escalation Candidates
+| Path | Escalation criterion | Why subagent is insufficient |
+| --- | --- | --- |
 
 ## Integration Strategy
 
@@ -186,9 +190,13 @@ Default workflow language: the language the user is currently using, unless the 
 
 ## Current Phase State
 
-## Thread Registry
-| Thread | Purpose | Scope | Source docs | Status | Verification | Review | Result |
-| --- | --- | --- | --- | --- | --- | --- | --- |
+## Delegation Registry
+| Delegate | Type | Role | Purpose | Scope | Source docs | Status | Verification | Review | Result |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+
+## Thread Escalations
+| Thread | Escalation criterion | Reason | Status | Result |
+| --- | --- | --- | --- | --- |
 
 ## Work Completed
 
@@ -198,7 +206,7 @@ Default workflow language: the language the user is currently using, unless the 
 
 ## Pre-Commit / Pre-Delivery Verification
 
-## Reviewer Sub-Agent Summaries
+## Review Subagent Summaries
 
 ## Integration Notes
 
@@ -245,15 +253,18 @@ Default workflow language: the language the user is currently using, unless the 
 - Notes:
 ```
 
-## Research or Design Thread Prompt
+## Research or Design Delegate Prompt
 
 ```text
-You are a bounded research/design worker thread in the Multi-Thread Delivery workflow.
+You are a bounded research/design delegate in the Orchestrated Delivery workflow.
 
 Workflow language:
 <user's current language unless explicitly overridden>
 
 Current phase: Phase 2, Research and Solution Design.
+
+Delegate type and role:
+<subagent role, or thread with escalation criterion>
 
 User goal:
 <goal summary>
@@ -273,9 +284,6 @@ Non-scope:
 Context to read:
 <files, docs, URLs, logs, code areas>
 
-Skill requirement:
-Before acting, identify relevant available skills for this task. Use the minimal set that applies. Read and follow each selected SKILL.md. In your handoff, report which skills you used, which relevant skills you skipped and why, and whether any skill instruction conflicted with this workflow brief.
-
 Expected output:
 - Write the handoff in the workflow language
 - Investigation scope
@@ -290,15 +298,18 @@ Expected output:
 Do not change requirements, acceptance criteria, or user-facing decisions. If the brief conflicts with reality, stop and report the conflict.
 ```
 
-## Prototype Thread Prompt
+## Prototype Delegate Prompt
 
 ```text
-You are a bounded prototype worker thread in the Multi-Thread Delivery workflow.
+You are a bounded prototype delegate in the Orchestrated Delivery workflow.
 
 Workflow language:
 <user's current language unless explicitly overridden>
 
 Current phase: Phase 4, Demo or Prototype.
+
+Delegate type and role:
+<subagent role, lead-owned task, or thread with escalation criterion>
 
 User goal and selected solution:
 <summary>
@@ -318,9 +329,6 @@ Non-scope:
 Writable boundaries:
 <files or artifacts allowed>
 
-Skill requirement:
-Before acting, identify relevant available skills for this task. Use the minimal set that applies. Read and follow each selected SKILL.md. In your handoff, report which skills you used, which relevant skills you skipped and why, and whether any skill instruction conflicted with this workflow brief.
-
 Expected output:
 - Write the handoff in the workflow language
 - Prototype/demo artifact
@@ -334,15 +342,18 @@ Expected output:
 Stop and report if the prototype would require scope expansion or contradicts confirmed documents.
 ```
 
-## Execution Worker Thread Prompt
+## Execution Delegate Prompt
 
 ```text
-You are a bounded execution worker thread in the Multi-Thread Delivery workflow.
+You are a bounded execution delegate in the Orchestrated Delivery workflow.
 
 Workflow language:
 <user's current language unless explicitly overridden>
 
 Current phase: Phase 6, Execution, Verification, Review.
+
+Delegate type and role:
+<worker subagent, lead-owned task, or thread with escalation criterion>
 
 User goal:
 <goal summary>
@@ -362,17 +373,14 @@ Scope:
 Non-scope:
 <excluded work>
 
-Writable boundaries:
-<files or artifacts allowed>
+Ownership / writable boundaries:
+<files, modules, or artifacts owned by this delegate>
 
 Verification requirements:
 <tests, checks, walkthroughs, fact checks, or other validation>
 
-Skill requirement:
-Before acting, identify relevant available skills for this task. Use the minimal set that applies. Read and follow each selected SKILL.md. In your handoff, report which skills you used, which relevant skills you skipped and why, and whether any skill instruction conflicted with this workflow brief.
-
-Reviewer requirement:
-Before handoff, call the predefined reviewer sub-agent with the goal, requirements, selected solution, acceptance criteria, execution plan scope, actual deliverable or diff, verification already run, and known risks. Handle the findings before returning to the lead agent.
+Review requirement:
+Your output must be reviewed by the appropriate review subagent before final integration. If you are an execution thread, obtain reviewer subagent review before handoff when possible; otherwise provide enough context for the lead agent to run review.
 
 Expected handoff:
 - Write the handoff in the workflow language
@@ -380,8 +388,7 @@ Expected handoff:
 - Files or artifacts changed
 - Verification performed and results
 - Pre-commit verification performed, if a commit was created or requested
-- Skills used and skipped
-- Reviewer sub-agent summary
+- Review subagent summary, if review happened inside this delegate
 - Findings fixed
 - Findings accepted as risk, with rationale
 - Open risks or blockers
@@ -390,6 +397,20 @@ Expected handoff:
 
 Stop and report if you need to change requirements, solution, acceptance criteria, scope, writable boundaries, or destructive operations.
 ```
+
+## Thread Escalation Checklist
+
+Use a thread only when at least one applies:
+
+- Independent worktree execution is needed.
+- Persistent context across many turns is needed.
+- Long-running multi-turn work should be tracked separately.
+- The user should be able to inspect a separated work track.
+- The work involves a stateful prototype or environment.
+- Risk isolation is useful.
+- A single subagent handoff would be too shallow or unreliable.
+
+Record the selected criterion in the phase document or `06-execution-log.md`.
 
 ## Worker Handoff Checklist
 
@@ -400,11 +421,9 @@ Changed files or artifacts:
 
 Verification:
 
-Skills used:
+Pre-commit verification, if applicable:
 
-Relevant skills skipped:
-
-Reviewer sub-agent summary:
+Review subagent summary:
 
 Review findings fixed:
 
@@ -417,9 +436,9 @@ Suggested document updates:
 Integration notes:
 ```
 
-## Reviewer Sub-Agent Context Checklist
+## Review Subagent Context Checklist
 
-Provide the predefined reviewer sub-agent:
+Provide the review subagent:
 
 - Workflow language.
 - User goal.
@@ -432,7 +451,7 @@ Provide the predefined reviewer sub-agent:
 - Known risks.
 - Review scope and non-scope.
 
-Use the reviewer sub-agent's own system prompt for review behavior and output expectations.
+Use the review subagent's own system prompt for review behavior and output expectations.
 
 ## User Gate Prompt Pattern
 
@@ -453,3 +472,4 @@ Recommended default:
 
 Please explicitly confirm, reject, or request changes before I proceed.
 ```
+

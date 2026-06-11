@@ -1,22 +1,22 @@
 {
-  "name": "multi-thread-delivery",
-  "version": "0.1.1",
-  "description": "Documented multi-thread workflow for complex goals, from alignment through delivery.",
+  "name": "orchestrated-delivery",
+  "version": "0.2.0",
+  "description": "Subagent-first, thread-capable workflow for complex goal delivery.",
   "author": {
     "name": "Local developer"
   },
   "skills": "./skills/",
   "interface": {
-    "displayName": "Multi-Thread Delivery",
-    "shortDescription": "Run documented multi-thread delivery workflows.",
-    "longDescription": "A workflow skill for leading complex user goals through requirements alignment, researched solution options, acceptance criteria, optional prototyping, execution planning, worker threads, verification, sub-agent review, and delivery reporting.",
+    "displayName": "Orchestrated Delivery",
+    "shortDescription": "Coordinate complex delivery with subagents, threads, gates, and documents.",
+    "longDescription": "A workflow skill for leading complex user goals through requirements alignment, researched solution options, acceptance criteria, optional prototypes, execution planning, subagent delegation, thread escalation, verification, review, and delivery reporting.",
     "developerName": "Local developer",
     "category": "Productivity",
     "capabilities": ["Interactive", "Write"],
     "defaultPrompt": [
-      "Use this workflow in my current language.",
-      "Plan this with requirements, options, acceptance, and execution threads.",
-      "Run a documented multi-thread workflow for this project."
+      "Use orchestrated delivery in my current language.",
+      "Plan this with requirements, options, acceptance, delegation, and review.",
+      "Run a documented subagent-first workflow for this goal."
     ]
   }
 }
