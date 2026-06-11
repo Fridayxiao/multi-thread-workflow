@@ -1,0 +1,22 @@
+{
+  "name": "multi-thread-delivery",
+  "version": "0.1.0",
+  "description": "Documented multi-thread workflow for complex goals, from alignment through delivery.",
+  "author": {
+    "name": "Local developer"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Multi-Thread Delivery",
+    "shortDescription": "Run documented multi-thread delivery workflows.",
+    "longDescription": "A workflow skill for leading complex user goals through requirements alignment, researched solution options, acceptance criteria, optional prototyping, execution planning, worker threads, verification, sub-agent review, and delivery reporting.",
+    "developerName": "Local developer",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Write"],
+    "defaultPrompt": [
+      "Use the multi-thread delivery workflow for this goal.",
+      "Plan this with requirements, options, acceptance, and execution threads.",
+      "Run a documented multi-thread workflow for this project."
+    ]
+  }
+}
