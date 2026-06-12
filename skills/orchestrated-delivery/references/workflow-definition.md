@@ -1,6 +1,6 @@
 # Orchestrated Delivery Workflow Definition
 
-Version: 0.3
+Version: 0.3.1
 
 ## Purpose
 
@@ -132,22 +132,54 @@ If the task is too small or the user rejects delegation/documents/gates, exit th
 
 ## Phase 1: Problem, Goal, Requirements Alignment
 
-Goal: define the problem, target outcome, requirements, constraints, non-goals, unknowns, and risks.
+Goal: define the problem from the user's perspective, the target outcome, actors, scenarios, scope, requirements, constraints, assumptions, open questions, non-goals, terms, and risks at enough depth that later phases can trace decisions back to stable requirements.
 
 Delegation: none. This phase is lead-owned because user alignment must remain direct.
 
 Artifact: `01-problem-goal-requirements.md`.
 
+Approach:
+
+- First synthesize a draft from the existing conversation and available project context. Do not start with a broad interview when the answer can be inferred or researched.
+- For codebase work, inspect applicable project guidance and domain documents before finalizing terminology, including `AGENTS.md`, `CONTEXT.md`, `CONTEXT-MAP.md`, relevant `docs/adr/`, and nearby code or tests when they clarify current behavior.
+- Use the project's existing domain language. If the user's terms conflict with a glossary or code reality, call out the conflict and resolve the canonical term before proceeding.
+- Stress-test fuzzy requirements with concrete scenarios, including the primary path, edge cases, permission or data boundaries, integration boundaries, failure modes, and unacceptable outcomes.
+- Ask targeted clarification questions only for blocking gaps. Ask one decision at a time, provide a recommended answer, and wait for feedback before moving to the next blocking decision.
+- Convert resolved decisions into traceable entries: requirements (`R-*`), constraints (`C-*`), assumptions (`A-*`), open questions (`Q-*`), risks (`K-*`), terms (`T-*`), or non-goals (`N-*`).
+
+Documentation sync:
+
+- If a domain term is resolved and the project uses `CONTEXT.md` or `CONTEXT-MAP.md`, update the appropriate glossary when file edits are allowed. `CONTEXT.md` is only for domain language, not implementation decisions.
+- Offer or create an ADR only when the decision is hard to reverse, surprising without context, and the result of a real tradeoff. Do not create ADRs for obvious or easily reversible choices.
+- If file edits are not yet allowed, record required glossary or ADR updates in `01-problem-goal-requirements.md` so they are not lost.
+
+Depth requirements:
+
+- The problem statement must be from the user's perspective, not only a technical task summary.
+- The current state and desired state must be explicit.
+- Core actors, stakeholders, user stories, and scenarios must be identified where applicable.
+- Scope must be explicit through in-scope items, out-of-scope items, and non-goals.
+- Every core requirement must have an ID, type, priority, source or owner, rationale, and acceptance hint or validation surface.
+- Constraints must distinguish hard constraints from preferences.
+- Assumptions must include confidence and a validation path.
+- Open questions must identify whether they block Phase 2, Phase 3, Phase 5, or Phase 6.
+- Must-have requirements may not rely on unresolved blocking questions.
+
 Gate:
 
-- The document or equivalent draft clearly states the problem, goal, requirements, constraints, non-goals, unknowns, and user confirmation record.
+- The document or equivalent draft clearly states the user-perspective problem, goal, current state, desired state, scope, requirements, constraints, assumptions, open questions, non-goals, terms, risks, and user confirmation record.
+- Core terminology is aligned with project language or unresolved conflicts are explicitly recorded.
+- The primary scenarios and important edge cases are covered at the level needed for solution design.
+- Every must-have requirement has an ID, priority, rationale, source or owner, and acceptance hint or validation surface.
+- No unresolved blocking question prevents Phase 2 research or makes the selected goal unstable.
 - The user explicitly confirms it.
-- Unknowns are recorded and do not block research.
+- Downstream phases are instructed to reference Phase 1 IDs when comparing options, writing acceptance criteria, planning execution paths, executing work, and reporting delivery.
 
 Rollback:
 
 - If the user disagrees, continue clarifying in Phase 1.
 - If the goal splits into independent goals, split the workflow.
+- If later phases expose vague or unstable requirements, return to Phase 1 and update the document before continuing.
 
 ## Phase 2: Research and Solution Design
 
@@ -171,12 +203,14 @@ Research requirements:
 - If no suitable existing solution is found, collect enough task and system context to justify a custom design.
 - The lead agent must interact with delegates until their output is strong enough to support at least two options and a defensible recommendation.
 - `02-solution-options.md` must record what existing solutions were investigated and why they were adopted or rejected.
+- Each option must map its fit, gaps, and tradeoffs to relevant Phase 1 requirement, constraint, assumption, and risk IDs.
 
 Gate:
 
 - At least one independent research/design delegate has completed in Standard and Full modes.
 - At least two options are compared.
 - Key assumptions, deprecation risks, and freshness risks are checked or explicitly recorded.
+- Options are evaluated against Phase 1 IDs, not only a loose goal summary.
 - The lead agent recommends a default with rationale.
 - The user selects one option or approves a combination.
 
@@ -204,6 +238,7 @@ Gate:
 - Each core requirement maps to at least one acceptance criterion.
 - Each criterion has a validation method or an explicit substitute judgment method.
 - Unacceptable outcomes are stated.
+- Requirement IDs from Phase 1 are preserved so later execution can trace delivered work to confirmed requirements.
 - The user explicitly confirms the criteria.
 
 Rollback:
@@ -260,6 +295,7 @@ Gate:
 - The execution path is clear.
 - Parallel and serial work are separated.
 - Each delegate path has a target, role, scope, inputs, outputs, validation method, stopping conditions, ownership boundaries, and review-gated status.
+- Each path identifies the Phase 1 requirement IDs and Phase 3 acceptance criteria it covers.
 - Thread escalation candidates are justified by explicit criteria.
 - Integration and rollback are defined.
 - The user explicitly confirms the plan.

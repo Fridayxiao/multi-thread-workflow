@@ -13,23 +13,96 @@ Default workflow language: the language the user is currently using, unless the 
 
 ## Original Request
 
-## Problem Definition
+## Workflow Language
 
-## Goal
+## Context Sources Reviewed
+- Conversation:
+- Project guidance:
+- Domain glossary:
+- ADRs or prior decisions:
+- Code, tests, docs, logs, or external sources:
 
-## Success Criteria Summary
+## User-Perspective Problem Statement
+
+## Current State
+
+## Desired State
+
+## Primary Goal
+
+## Success Definition
+
+## Actors and Stakeholders
+
+## User Stories and Scenarios
+1. As a <actor>, I want <capability>, so that <benefit>.
+
+## In Scope
+
+## Out of Scope and Non-Goals
+
+| ID | Item | Rationale |
+| --- | --- | --- |
+| N-001 |  |  |
 
 ## Requirements
 
-## Non-Functional Requirements
+| ID | Type | Priority | Requirement | Rationale | Source/Owner | Acceptance Hint / Validation Surface |
+| --- | --- | --- | --- | --- | --- | --- |
+| R-001 | Functional / Quality / Operational / UX / Security / Data / Documentation | Must / Should / Could |  |  |  |  |
 
 ## Constraints
 
-## Non-Goals
+| ID | Constraint | Hard/Soft | Source | Impact |
+| --- | --- | --- | --- | --- |
+| C-001 |  |  |  |  |
 
-## Unknowns and Assumptions
+## Assumptions
 
-## Risks
+| ID | Assumption | Confidence | Validation Path | Blocking? |
+| --- | --- | --- | --- | --- |
+| A-001 |  | High / Medium / Low |  | Yes / No |
+
+## Open Questions
+
+| ID | Question | Recommended Default | Owner | Blocking? | Needed Before Phase |
+| --- | --- | --- | --- | --- | --- |
+| Q-001 |  |  |  | Yes / No | 2 / 3 / 5 / 6 |
+
+## Domain Terms
+
+| ID | Term | Canonical Meaning | Avoid / Ambiguous Terms | Source |
+| --- | --- | --- | --- | --- |
+| T-001 |  |  |  |  |
+
+## Known Decisions
+
+| ID | Decision | Why It Is Already Decided | Revisit Trigger |
+| --- | --- | --- | --- |
+| D-001 |  |  |  |
+
+## Risks and Failure Modes
+
+| ID | Risk / Failure Mode | Impact | Mitigation or Follow-Up |
+| --- | --- | --- | --- |
+| K-001 |  |  |  |
+
+## Grill Notes
+- Fuzzy terms challenged:
+- Scenarios used to stress-test requirements:
+- Conflicts with glossary, docs, code, or prior decisions:
+- User decisions made during clarification:
+
+## Documentation Sync
+- CONTEXT.md updates needed:
+- ADRs needed:
+- Deferred documentation updates:
+
+## Downstream Traceability Rules
+- Phase 2 solution options must cite relevant `R-*`, `C-*`, `A-*`, and `K-*` IDs.
+- Phase 3 acceptance criteria must map to `R-*` IDs.
+- Phase 5 execution paths must cite the `R-*` and acceptance criteria they cover.
+- Phase 6 execution and review must report work against the same IDs.
 
 ## Upstream Document Check
 - Reviewed:
@@ -60,14 +133,14 @@ Default workflow language: the language the user is currently using, unless the 
 - Benefits:
 - Costs:
 - Risks:
-- Fit to requirements:
+- Fit to Phase 1 IDs:
 
 ## Option B
 - Description:
 - Benefits:
 - Costs:
 - Risks:
-- Fit to requirements:
+- Fit to Phase 1 IDs:
 
 ## Other Options Considered
 
@@ -96,7 +169,7 @@ Default workflow language: the language the user is currently using, unless the 
 ## Quality Criteria
 
 ## Requirement Traceability
-| Requirement | Acceptance criterion | Validation method |
+| Requirement ID | Acceptance criterion | Validation method |
 | --- | --- | --- |
 
 ## Unacceptable Outcomes
@@ -157,8 +230,8 @@ Default workflow language: the language the user is currently using, unless the 
 ## Serial Dependencies
 
 ## Parallel Paths
-| Path | Delegate type | Role | Review-gated | Goal | Scope | Inputs | Outputs | Validation | Stop conditions |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Path | Requirement / AC IDs | Delegate type | Role | Review-gated | Goal | Scope | Inputs | Outputs | Validation | Stop conditions |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
 ## Delegation Plan
 
@@ -195,8 +268,8 @@ Default workflow language: the language the user is currently using, unless the 
 ## Current Phase State
 
 ## Delegation Registry
-| Delegate | Type | Role | Review-gated | Purpose | Scope | Source docs | Status | Verification | Review | Result |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Delegate | Type | Role | Requirement / AC IDs | Review-gated | Purpose | Scope | Source docs | Status | Verification | Review | Result |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
 ## Review-Gated Thread Lanes
 | Thread | Purpose | Reviewer roles | Verification | Review result | Handoff status |
@@ -374,6 +447,7 @@ Source-of-truth context:
 - Selected solution: <summary or path>
 - Acceptance criteria: <summary or path>
 - Execution plan: <summary or path>
+- Requirement and acceptance IDs covered by this task: <IDs>
 
 Your task:
 <specific execution path>
