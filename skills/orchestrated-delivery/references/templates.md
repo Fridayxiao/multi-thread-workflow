@@ -157,12 +157,16 @@ Default workflow language: the language the user is currently using, unless the 
 ## Serial Dependencies
 
 ## Parallel Paths
-| Path | Delegate type | Role | Goal | Scope | Inputs | Outputs | Validation | Stop conditions |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Path | Delegate type | Role | Review-gated | Goal | Scope | Inputs | Outputs | Validation | Stop conditions |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
 ## Delegation Plan
 
-## Thread Escalation Candidates
+## Review-Gated Thread Lanes
+| Path | Review required before handoff | Reviewer roles | Why thread is required |
+| --- | --- | --- | --- |
+
+## Other Thread Escalation Candidates
 | Path | Escalation criterion | Why subagent is insufficient |
 | --- | --- | --- |
 
@@ -191,10 +195,14 @@ Default workflow language: the language the user is currently using, unless the 
 ## Current Phase State
 
 ## Delegation Registry
-| Delegate | Type | Role | Purpose | Scope | Source docs | Status | Verification | Review | Result |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Delegate | Type | Role | Review-gated | Purpose | Scope | Source docs | Status | Verification | Review | Result |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
-## Thread Escalations
+## Review-Gated Thread Lanes
+| Thread | Purpose | Reviewer roles | Verification | Review result | Handoff status |
+| --- | --- | --- | --- | --- | --- |
+
+## Other Thread Escalations
 | Thread | Escalation criterion | Reason | Status | Result |
 | --- | --- | --- | --- | --- |
 
@@ -353,7 +361,10 @@ Workflow language:
 Current phase: Phase 6, Execution, Verification, Review.
 
 Delegate type and role:
-<worker subagent, lead-owned task, or thread with escalation criterion>
+<execution thread, worker subagent for simple non-review-gated work, or lead-owned task>
+
+Review-gated:
+<yes/no. If yes, this must be an execution thread unless the lead agent owns the work directly>
 
 User goal:
 <goal summary>
@@ -380,7 +391,7 @@ Verification requirements:
 <tests, checks, walkthroughs, fact checks, or other validation>
 
 Review requirement:
-Your output must be reviewed by the appropriate review subagent before final integration. If you are an execution thread, obtain reviewer subagent review before handoff when possible; otherwise provide enough context for the lead agent to run review.
+Your output must be reviewed by the appropriate review subagent before final integration. If this is a review-gated execution thread, obtain reviewer subagent review before handoff unless blocked. If this is a simple worker subagent task, provide enough context for the lead agent to run review after handoff.
 
 Expected handoff:
 - Write the handoff in the workflow language
@@ -400,8 +411,9 @@ Stop and report if you need to change requirements, solution, acceptance criteri
 
 ## Thread Escalation Checklist
 
-Use a thread only when at least one applies:
+Use a thread when at least one applies:
 
+- The execution lane must call reviewer subagents before handoff.
 - Independent worktree execution is needed.
 - Persistent context across many turns is needed.
 - Long-running multi-turn work should be tracked separately.
@@ -472,4 +484,3 @@ Recommended default:
 
 Please explicitly confirm, reject, or request changes before I proceed.
 ```
-

@@ -1,14 +1,14 @@
 # Orchestrated Delivery Workflow Definition
 
-Version: 0.2
+Version: 0.3
 
 ## Purpose
 
 This workflow is for complex or high-risk user goals. It reduces four delivery risks: misunderstood requirements, outdated or shallow solution design, execution drift, and vague final acceptance.
 
-The lead agent aligns the goal and success criteria with the user, uses subagents as the default delegation primitive, escalates to Codex threads only when persistence or isolation is needed, maintains phase documents, synthesizes all delegated outputs, and remains accountable for final delivery.
+The lead agent aligns the goal and success criteria with the user, uses subagents for research, design checks, advisory validation, and review, uses Codex threads for review-gated execution lanes, maintains phase documents, synthesizes all delegated outputs, and remains accountable for final delivery.
 
-Threads are not the point of the workflow. They preserve the original thread-based capabilities: independent worktrees, long-running multi-turn work, persistent context, user-visible separated tracks, and risk isolation. Use them only when those capabilities matter.
+Threads are not the point of the workflow, but they are the right execution container when the worker must call reviewer subagents before handoff. Ordinary subagents cannot spawn reviewer subagents. Threads also preserve the original thread-based capabilities: independent worktrees, long-running multi-turn work, persistent context, user-visible separated tracks, and risk isolation.
 
 ## Applicability
 
@@ -40,15 +40,15 @@ The lead agent must not outsource user alignment, final synthesis, source-of-tru
 
 ### Subagent Delegate
 
-A subagent delegate is the default bounded work unit for research, design review, implementation slices, validation, documentation, and specialist checks. Use the most specific available role for the task, such as `docs-researcher`, `explorer`, `architect`, `product-designer`, `worker`, `code-reviewer`, `test-engineer`, `security-auditor`, or `docs-maintainer`.
+A subagent delegate is the default bounded work unit for research, design review, advisory validation, simple bounded work that does not require nested review, documentation, and specialist checks. Use the most specific available role for the task, such as `docs-researcher`, `explorer`, `architect`, `product-designer`, `worker`, `code-reviewer`, `test-engineer`, `security-auditor`, or `docs-maintainer`.
 
 Subagents should receive self-contained briefs and return structured handoffs. Their outputs are advisory until evaluated by the lead agent.
 
 ### Thread Delegate
 
-A thread delegate is an escalation unit, not the default. Use a thread only when a subagent is insufficient because the task needs persistence, an independent worktree, long-running multi-turn work, a user-visible separated track, risk isolation, or a stateful prototype.
+A thread delegate is the default container for non-trivial review-gated execution and an escalation unit for work that needs persistence, an independent worktree, long-running multi-turn work, a user-visible separated track, risk isolation, or a stateful prototype.
 
-Thread delegates must still follow bounded briefs. If an execution thread is used, it must obtain reviewer subagent review before handoff when possible.
+Thread delegates must still follow bounded briefs. A review-gated execution thread must obtain reviewer subagent review before handoff unless blocked; if blocked, it must report the blocker instead of pretending review happened.
 
 ### Reviewer Subagent
 
@@ -65,7 +65,7 @@ Requirements:
 - Execute Phase 0 through Phase 7.
 - Use independent research/design delegation in Phase 2.
 - Use Phase 4 when prototype validation reduces material risk or the user requests it.
-- Use delegated execution and review in Phase 6.
+- Use thread-first review-gated execution and review in Phase 6.
 - Escalate to threads only when thread escalation criteria are met.
 - Maintain complete source-of-truth documents.
 - Keep explicit user gates.
@@ -81,7 +81,7 @@ Requirements:
 - Phase 4 is optional.
 - Documents may be concise but must exist.
 - Use at least one research/design delegate in Phase 2.
-- Use delegated execution in Phase 6 when work is non-trivial.
+- Use thread-first review-gated execution in Phase 6 when work is non-trivial.
 - Require appropriate review subagents.
 - Do not skip user gates.
 
@@ -93,7 +93,7 @@ Requirements:
 
 - Phase 1, Phase 3, and Phase 5 may be concise or combined, but goal, acceptance, and execution path must remain explicit.
 - Phase 2 may use one research/design delegate, but should still compare at least two options unless the user explicitly wants one direction.
-- Phase 6 still requires verification and review.
+- Phase 6 still requires verification and review. Review-gated execution must use a thread unless the lead agent performs the work directly and runs review itself.
 - Durable documentation is still required. A combined Lite document is acceptable, but it must preserve every phase's required decisions, evidence, validation, and user confirmations.
 - Explain the risks of compression.
 - Do not use Lite Mode for high-risk work.
@@ -116,14 +116,14 @@ If the user uses multiple languages, infer the working language from the current
 
 ## Phase 0: Activation
 
-Goal: decide whether to use the workflow and establish authorization for subagent delegation and thread escalation.
+Goal: decide whether to use the workflow and establish authorization for subagent delegation, review-gated execution threads, and thread escalation.
 
 Delegation: no work delegation yet.
 
 Gate:
 
 - The user explicitly asks for or approves the workflow.
-- The user understands the workflow may use subagents, may escalate to threads when justified, produce documents, and wait at key gates.
+- The user understands the workflow may use subagents, may use threads for review-gated execution or other escalation criteria, produce documents, and wait at key gates.
 - The workflow language is determined.
 - The workflow document directory is established. Default to `docs/agent-workflows/<goal-slug>/` unless the user specifies another location.
 - The lead agent judges the task suitable.
@@ -243,7 +243,7 @@ Rollback:
 
 ## Phase 5: Execution Path Plan
 
-Goal: plan how to execute before doing the work. Identify serial dependencies, parallel paths, delegate ownership, thread escalation candidates, integration strategy, validation strategy, risks, and rollback points.
+Goal: plan how to execute before doing the work. Identify serial dependencies, parallel paths, delegate ownership, review-gated thread lanes, other thread escalation candidates, integration strategy, validation strategy, risks, and rollback points.
 
 Delegation: lead-owned. Optional advisory subagent checks may be used, but no thread may be used and no delegate may replace the plan or user confirmation.
 
@@ -259,7 +259,7 @@ Gate:
 
 - The execution path is clear.
 - Parallel and serial work are separated.
-- Each delegate path has a target, role, scope, inputs, outputs, validation method, stopping conditions, and ownership boundaries.
+- Each delegate path has a target, role, scope, inputs, outputs, validation method, stopping conditions, ownership boundaries, and review-gated status.
 - Thread escalation candidates are justified by explicit criteria.
 - Integration and rollback are defined.
 - The user explicitly confirms the plan.
@@ -273,7 +273,7 @@ Rollback:
 
 Goal: execute the plan, verify results, run appropriate review subagents, integrate outputs, and update documents.
 
-Delegation: default to `worker` subagents with explicit ownership for bounded execution. Escalate an execution path to a thread only when subagent delegation is insufficient because persistence, independent worktree execution, long-running multi-turn work, user-visible separated tracking, or risk isolation is needed.
+Delegation: non-trivial review-gated execution is thread-first. Use `worker` subagents only for simple bounded work that does not need to call reviewer subagents before handoff, or when the lead agent will run review after the subagent returns. Escalate any execution path to a thread when subagent delegation is insufficient because pre-handoff reviewer subagent review, persistence, independent worktree execution, long-running multi-turn work, user-visible separated tracking, or risk isolation is needed.
 
 Artifact: `06-execution-log.md`.
 
@@ -283,13 +283,15 @@ Requirements:
 - Each execution delegate verifies its own scope.
 - Each execution delegate reports changed files or artifacts, verification, risks, and suggested document updates.
 - Each output is reviewed by the appropriate review subagent role before final integration.
-- If an execution thread is used, that thread must obtain reviewer subagent review before handoff when possible.
+- Each non-trivial review-gated execution lane runs in a thread.
+- Each review-gated execution thread must obtain reviewer subagent review before handoff unless blocked; blocked review must be reported as a blocker or residual risk.
+- If a simple worker subagent is used for execution, the lead agent must run the appropriate review subagent after handoff before final integration.
 - The lead agent checks each handoff, integrates work, resolves conflicts, and performs workflow-level verification.
 - Affected source-of-truth documents are updated.
 
 Typical roles:
 
-- `worker` for bounded implementation or execution.
+- `worker` for simple bounded implementation or execution that does not require nested review before handoff.
 - `code-reviewer` for code review.
 - `test-engineer` for test coverage, failure analysis, and validation strategy.
 - `security-auditor` for security-sensitive changes.
@@ -297,10 +299,10 @@ Typical roles:
 
 Gate:
 
-- All delegated execution paths are complete or explicitly canceled.
+- All delegated execution paths and review-gated thread lanes are complete or explicitly canceled.
 - Required verification has run or residual risk is explicit.
 - Review subagent findings are handled.
-- The execution log includes delegation registry, verification evidence, review summaries, integration notes, and unresolved risks.
+- The execution log includes delegation registry, review-gated thread lanes, verification evidence, review summaries, integration notes, and unresolved risks.
 - Delivered work still matches `01`, `02`, `03`, and `05`.
 
 Rollback:
@@ -368,7 +370,7 @@ Every phase must maintain upstream documents, not only create its own artifact.
 
 ## Delegation Protocol
 
-Subagents are the default delegation primitive. Threads are escalation tools.
+Subagents are the default delegation primitive for research, advisory checks, specialist review, and simple bounded work. Threads are mandatory for review-gated execution lanes and are escalation tools elsewhere.
 
 Before delegating, the lead agent must state in the main workflow:
 
@@ -392,6 +394,7 @@ Every delegation brief must be self-contained and include:
 - Writable boundaries, if any.
 - Expected output format.
 - Verification requirements.
+- Whether the task is review-gated.
 - Stopping conditions.
 - Handoff requirements.
 
@@ -399,8 +402,9 @@ Delegates must stop and report when the brief conflicts with reality, scope need
 
 ## Thread Escalation Criteria
 
-Use a thread only when one or more criteria is met:
+Use a thread when one or more criteria is met:
 
+- The execution lane must call reviewer subagents before handoff.
 - Independent worktree execution is needed.
 - The task requires persistent context across many turns.
 - The task is long-running and benefits from an independently trackable lane.
@@ -409,7 +413,7 @@ Use a thread only when one or more criteria is met:
 - Risk isolation is useful.
 - A single subagent handoff would be too shallow or unreliable.
 
-When escalating to a thread, the lead agent must record the criterion in `06-execution-log.md` or the current phase document.
+When using or escalating to a thread, the lead agent must record the criterion in `06-execution-log.md` or the current phase document.
 
 Threads remain prohibited in Phase 1, Phase 3, and Phase 5.
 
@@ -435,7 +439,7 @@ The workflow must provide or require enough review context:
 - Verification already run.
 - Known risks.
 
-Review subagents' own system prompts control review behavior. The lead agent must treat findings as advisory, then fix, document accepted risk, or roll back to an earlier phase when needed.
+Review subagents' own system prompts control review behavior. Ordinary subagents cannot spawn review subagents, so review for ordinary subagent outputs is run by the lead agent after handoff. Threads can call review subagents internally and must do so for review-gated execution lanes. The lead agent must treat findings as advisory, then fix, document accepted risk, or roll back to an earlier phase when needed.
 
 ## Execution Quality
 
@@ -499,10 +503,10 @@ Record rollbacks with the trigger, affected documents, target phase, gates to re
 ## Hard Rules
 
 - Do not delegate before the user activates the workflow.
-- Do not use threads unless a thread escalation criterion is met.
+- Use threads for review-gated execution lanes; do not use threads elsewhere unless a thread escalation criterion is met.
 - Do not use threads in Phase 1, Phase 3, or Phase 5.
+- Do not assign review-gated execution to an ordinary subagent, because ordinary subagents cannot call reviewer subagents before handoff.
 - Do not let delegates replace user confirmation.
 - Do not let delegates change source-of-truth decisions on their own.
 - Do not continue from a source-of-truth document known to be wrong.
 - Do not claim completion before acceptance criteria, verification, review findings, document consistency, and delivery reporting are handled.
-
