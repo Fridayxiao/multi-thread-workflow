@@ -1,22 +1,22 @@
 {
   "name": "orchestrated-delivery",
-  "version": "0.3.2",
-  "description": "Subagent-led workflow with thread-first review-gated execution.",
+  "version": "0.3.3",
+  "description": "Documented workflow for complex goals with requirements, options, gates, delegation, verification, and delivery reporting.",
   "author": {
     "name": "Local developer"
   },
   "skills": "./skills/",
   "interface": {
     "displayName": "Orchestrated Delivery",
-    "shortDescription": "Coordinate complex delivery with subagents, thread lanes, gates, and documents.",
-    "longDescription": "A workflow skill for leading complex user goals through requirements alignment, researched solution options, acceptance criteria, optional prototypes, execution planning, subagent-led research and advisory work, thread-first review-gated execution, verification, review, and delivery reporting.",
+    "shortDescription": "Coordinate complex delivery with requirements, gates, delegation, and review.",
+    "longDescription": "A workflow skill for leading complex user goals through requirements alignment, researched solution options, acceptance criteria, optional prototypes, execution path planning, delegated research and execution, verification, review, and delivery reporting.",
     "developerName": "Local developer",
     "category": "Productivity",
-    "capabilities": ["Interactive", "Write"],
+    "capabilities": ["Interactive", "Read", "Write"],
     "defaultPrompt": [
       "Use orchestrated delivery in my current language.",
-      "Plan this with requirements, options, acceptance, delegation, and review.",
-      "Run a documented orchestrated workflow for this goal."
+      "Run a documented orchestrated workflow for this complex goal.",
+      "Coordinate requirements, options, execution paths, review, and delivery."
     ]
   }
 }

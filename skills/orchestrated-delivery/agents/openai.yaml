@@ -1,0 +1,4 @@
+interface:
+  display_name: "Orchestrated Delivery"
+  short_description: "Guide complex goals through requirements, gates, delegation, and review"
+  default_prompt: "Use $orchestrated-delivery to run a documented workflow for this complex goal."
