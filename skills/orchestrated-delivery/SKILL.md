@@ -14,7 +14,7 @@ Use this skill only after the user explicitly asks for, or approves, this workfl
 3. Confirm the current workflow mode: Full, Standard, Lite, Exit, or Split.
 4. Determine the workflow language. Default to the language the user is currently using unless the user explicitly requests another language.
 5. Establish the workflow document directory before Phase 1. Default to `docs/agent-workflows/<goal-slug>/` unless the user specifies another location.
-6. Do not create files, threads, or implementation work until the active phase gate allows it.
+6. Do not create implementation deliverables, threads, or execution work until the active phase gate allows them. Phase documents may be drafted or updated during their own phase after workflow activation, subject to the user's file-edit permissions.
 
 ## Non-Negotiable Rules
 
@@ -35,7 +35,7 @@ Use this skill only after the user explicitly asks for, or approves, this workfl
 ## Phase Summary
 
 - Phase 0: Activation and delegation/thread escalation authorization.
-- Phase 1: Problem, goal, requirements, constraints, and non-goals. Lead-owned; no delegation.
+- Phase 1: User-perspective problem, current and desired state, actors, scenarios, scope, traceable requirements, constraints, assumptions, terms, risks, and non-goals. Lead-owned; no delegation.
 - Phase 2: Research and solution design with at least two options. Default to research/design subagents; escalate to threads only when justified.
 - Phase 3: Acceptance criteria. Lead-owned; optional advisory subagent check; no threads.
 - Phase 4: Optional demo or prototype. Default to lead work or subagent delegation; escalate to a thread when persistence or an independent worktree is useful.

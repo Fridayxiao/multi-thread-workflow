@@ -35,7 +35,11 @@ Default workflow language: the language the user is currently using, unless the 
 ## Actors and Stakeholders
 
 ## User Stories and Scenarios
+Cover the primary path, important edge cases, failure modes, permission boundaries, data boundaries, integration boundaries, and scenarios that would split the goal into separate workflows.
+
 1. As a <actor>, I want <capability>, so that <benefit>.
+2. Edge case:
+3. Failure or boundary scenario:
 
 ## In Scope
 
