@@ -1,22 +1,27 @@
 {
   "name": "orchestrated-delivery",
-  "version": "0.3.3",
-  "description": "Documented workflow for complex goals with requirements, options, gates, delegation, verification, and delivery reporting.",
+  "version": "0.3.5+codex.20260616142606",
+  "description": "Documented delivery workflow and Codex thread management for complex goals.",
   "author": {
     "name": "Local developer"
   },
   "skills": "./skills/",
   "interface": {
     "displayName": "Orchestrated Delivery",
-    "shortDescription": "Coordinate complex delivery with requirements, gates, delegation, and review.",
-    "longDescription": "A workflow skill for leading complex user goals through requirements alignment, researched solution options, acceptance criteria, optional prototypes, execution path planning, delegated research and execution, verification, review, and delivery reporting.",
+    "shortDescription": "Coordinate delivery and manage Codex threads.",
+    "longDescription": "A workflow and thread-management plugin for leading complex user goals through requirements alignment, researched solution options, acceptance criteria, execution planning, delegated research and execution, Codex thread coordination, verification, review, and delivery reporting.",
     "developerName": "Local developer",
     "category": "Productivity",
-    "capabilities": ["Interactive", "Read", "Write"],
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
     "defaultPrompt": [
       "Use orchestrated delivery in my current language.",
       "Run a documented orchestrated workflow for this complex goal.",
-      "Coordinate requirements, options, execution paths, review, and delivery."
+      "Coordinate requirements, options, execution paths, review, and delivery.",
+      "Use $codex-thread-manager to inspect, coordinate, and organize Codex threads for this goal."
     ]
   }
 }

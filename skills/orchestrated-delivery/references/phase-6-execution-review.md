@@ -25,6 +25,19 @@ Execute the confirmed plan, verify results, review changes against prior decisio
 
 Create or update `06-execution-log.md`. Use `template-documents.md`.
 
+## Output Contract (Required Fields)
+
+`06-execution-log.md` must include:
+
+- current state and completed work;
+- delegation or thread records;
+- verification evidence with commands, checks, screenshots, or reviewable artifacts as applicable;
+- review results, including findings fixed or accepted as risk with rationale;
+- integration notes;
+- document updates;
+- open risks or blockers;
+- earlier document check confirming `01`, `02`, `03`, and `05` still match delivered work.
+
 ## Gate
 
 Proceed to delivery only when:

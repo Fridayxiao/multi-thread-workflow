@@ -17,6 +17,16 @@ Define what done means before implementation or delivery begins.
 
 Create or update `03-acceptance-criteria.md`. Use `template-documents.md`.
 
+## Output Contract (Required Fields)
+
+`03-acceptance-criteria.md` must include:
+
+- `AC-*` criteria that cover every must-have `R-*` requirement;
+- validation method for each criterion, or an explicit substitute judgment method when direct testing is not possible;
+- unacceptable outcomes -- may be stated per-criterion or as a document-level summary, but must appear at least once at the document level;
+- validation plan covering tests, inspection, demo, user review, or other evidence as appropriate;
+- explicit user confirmation.
+
 ## Gate
 
 Proceed only when:

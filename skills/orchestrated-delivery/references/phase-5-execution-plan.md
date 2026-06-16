@@ -19,6 +19,16 @@ Plan how to execute the selected solution by identifying serial dependencies, pa
 
 Create or update `05-execution-paths.md`. Use `template-documents.md`.
 
+## Output Contract (Required Fields)
+
+`05-execution-paths.md` must include:
+
+- selected solution and execution strategy;
+- serial work and parallel paths;
+- for each path: covered requirement or acceptance IDs, owner, scope, non-scope, expected output, verification, review, review-gated status, and stop conditions;
+- integration order and rollback points;
+- explicit user confirmation.
+
 ## Gate
 
 Proceed only when:

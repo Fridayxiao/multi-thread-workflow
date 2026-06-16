@@ -20,6 +20,18 @@ Define the problem from the user's perspective, the target outcome, current stat
 
 Create or update `01-problem-goal-requirements.md`. Use `template-documents.md`.
 
+## Output Contract (Required Fields)
+
+`01-problem-goal-requirements.md` must include:
+
+- original request and context reviewed;
+- user-perspective problem, current state, desired state, and goal;
+- scope, including in-scope work, out-of-scope work, and non-goals;
+- every must-have requirement with a stable `R-*` ID, source or owner, rationale, and acceptance hint or validation surface;
+- constraints, assumptions, open questions, risks, and terms at the depth needed for later phases;
+- earlier document check when resuming or revising;
+- explicit user confirmation.
+
 ## Gate
 
 Proceed only when:

@@ -1,6 +1,6 @@
 # Orchestrated Delivery Core
 
-Read this file at workflow start. Read phase and template files only when needed.
+Read this file at workflow start. Also read `shared-hard-rules.md` and `artifacts.md` before Phase 1. Read phase and template files only when needed.
 
 ## Purpose
 
@@ -24,9 +24,29 @@ The lead agent owns the workflow. It aligns with the user, writes and maintains 
 4. Check available tools before relying on them: thread creation, subagents, reviewer roles, browser, shell, network, and file-write permissions.
 5. If a needed tool is unavailable, choose a fallback before proceeding: lead-owned work, available subagent, user approval request, or recorded residual risk.
 6. Check whether the document directory already exists and follow the resume protocol below.
-7. Announce the current phase, next artifact, and next user confirmation point.
+7. Use `artifacts.md` for document path, required artifact, and completion rules.
+8. Announce the current phase, next artifact, and next user confirmation point.
 
 A gate is the check that must pass before moving to the next phase, including required user confirmation when listed.
+
+## Goal Setup
+
+Some runtimes support persistent goal tracking (e.g., Codex goals) -- a runtime objective that keeps long work from stopping before the required outcome is reached. If the runtime does not support persistent goals, skip this section.
+
+Do not create or adopt a persistent goal during Phase 1, Phase 2, or Phase 3, because the problem, solution, and acceptance criteria are still being corrected.
+
+Goal setup is allowed only when all of these are true:
+
+1. Phase 3 has been explicitly confirmed by the user.
+2. The user explicitly agrees to create or adopt a persistent goal.
+3. The goal text is based on confirmed source-of-truth documents, not only the original request.
+4. If Phase 4 is used and may change requirements, solution, or acceptance criteria, Phase 4 has passed its gate first.
+
+Shape the objective like:
+
+`Run the Orchestrated Delivery workflow for the confirmed <goal>; do not stop until required phase artifacts exist, required gates are recorded, execution is verified and reviewed, and the final delivery report gives user acceptance steps.`
+
+Do not mark the goal complete until the completion checks in `artifacts.md` pass. If goal tools are unavailable after the user asks for goal setup, record that limitation and continue without creating a goal.
 
 ## Resume Protocol
 
@@ -56,34 +76,27 @@ In Lite or low-risk Standard mode, the user may confirm several phase results in
 
 ## Document Rules
 
-- Keep documents compact by default. Omit empty sections.
-- Use bullets for small lists. Use tables only when comparison, traceability, or auditability is clearer.
-- Store phase documents in the workflow document directory.
-- Treat `01`, `02`, `03`, and `05` as source-of-truth documents once confirmed. Source-of-truth documents are the confirmed phase documents that later work must follow unless they are explicitly updated and reconfirmed.
-- At the start and end of each phase, check whether earlier documents remain accurate. Earlier documents means documents from prior phases, especially `01`, `02`, `03`, and `05`.
-- If a confirmed earlier document is wrong, update it and re-run the affected user confirmation before continuing.
-- Delegates may suggest document updates, but the lead agent decides and applies source-of-truth changes.
+Use `artifacts.md` for artifact paths, required documents, source-of-truth rules, and completion checks.
+
+Keep documents compact by default. Omit empty sections. Use bullets for small lists. Use tables only when comparison, traceability, or auditability is clearer.
+
+## Context Management
+
+This skill has many reference files. Do not load all of them at once. Follow the loading order in SKILL.md: read `workflow-core.md`, `shared-hard-rules.md`, and `artifacts.md` at start, then read only the current phase reference and the needed template section when drafting.
+
+If context is constrained, prioritize: (1) `shared-hard-rules.md`, (2) the current phase reference, (3) `artifacts.md`. Template files can be re-read when drafting. Phase references for completed phases can be dropped from context.
 
 ## Delegation And Review
 
-Here, a delegate means a thread or subagent given a bounded task. A reviewer means a specialized subagent asked to check work against the confirmed goal, requirements, solution, acceptance criteria, and execution path. Review-gated execution means work that cannot be handed off or integrated until the required reviewer has checked it.
+Terms: a delegate is a thread or subagent given a bounded task. A reviewer is a specialized subagent asked to check work against confirmed documents. Review-gated execution means work that cannot be handed off or integrated until the required reviewer has checked it.
 
-- Do not delegate Phase 1, Phase 3, or Phase 5 ownership.
+The rules for delegation ownership, review-gated execution, and advisory treatment of delegated output are in `shared-hard-rules.md`. The operational guidance below supplements those rules:
+
 - Use the most specific available delegate or reviewer role.
-- Standard and Full mode require at least one independent research or design delegate in Phase 2.
-- Non-trivial review-gated execution lanes must use a thread unless the lead agent owns the work directly and runs review itself.
-- Do not assign review-gated execution to an ordinary subagent, because ordinary subagents cannot call reviewer subagents before handoff.
 - Before delegating, provide a self-contained task brief with context, scope, non-scope, expected output, verification, and stopping conditions.
-- Treat delegated output as advisory until the lead agent checks it.
 - Record delegation, review, verification, risks, and integration notes in `06-execution-log.md`.
-- If thread or reviewer tools are unavailable, state the fallback and record residual risk. Residual risk means a known remaining risk after verification, fallback, or review.
+- If thread or reviewer tools are unavailable, state the fallback and record residual risk.
 
 ## Completion Rule
 
-Do not claim completion until:
-
-- `07-delivery-report.md` maps delivered work to acceptance criteria.
-- Required verification has run, or residual risk is explicit.
-- Review findings have been fixed or consciously accepted as risk.
-- Source-of-truth documents match the delivered state.
-- The user has clear acceptance steps.
+Do not claim completion until the completion checks in `artifacts.md` pass.

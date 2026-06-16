@@ -11,7 +11,7 @@ Research current and reusable solutions, verify relevant APIs or practices, and 
 1. Investigate existing or adaptable solutions before proposing custom work.
 2. Verify information that can go stale: APIs, dependencies, standards, product behavior, platform limits, laws, and market facts.
 3. If no suitable existing solution exists, collect enough codebase, domain, and operational context to justify a custom design.
-4. In Standard and Full mode, complete at least one independent research or design delegate. In Lite mode, delegation may be skipped only when speed is more important than independence; record the reason.
+4. In Standard and Full mode, complete at least one independent research or design delegate. "Independent" means the delegate works from a separate investigation scope or source set, not simply re-running the lead agent's analysis; the goal is to surface information or options the lead agent might miss. In Lite mode, delegation may be skipped only when speed is more important than independence; record the reason.
 5. Use a thread when persistence, independent worktree context, user-visible tracking, or long-running investigation is useful.
 6. Interact with delegates until their output is strong enough to support a recommendation.
 7. Compare options against Phase 1 IDs and constraints.
@@ -19,6 +19,18 @@ Research current and reusable solutions, verify relevant APIs or practices, and 
 ## Artifact
 
 Create or update `02-solution-options.md`. Use `template-documents.md`.
+
+## Output Contract (Required Fields)
+
+`02-solution-options.md` must include:
+
+- research summary and existing or reusable solutions checked;
+- at least two viable options unless the user explicitly approved a single direction;
+- benefits, costs, risks, and fit to Phase 1 IDs for each option;
+- freshness and deprecation checks for facts that can go stale;
+- delegate record for Standard and Full mode, or Lite-mode reason for skipping delegation;
+- recommended default with rationale;
+- explicit user decision.
 
 ## Gate
 

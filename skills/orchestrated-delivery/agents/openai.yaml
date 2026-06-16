@@ -1,4 +1,9 @@
+# OpenAI Codex agent interface metadata.
+# This file is consumed by Codex for agent discovery and display.
+# The .codex-plugin/plugin.json provides similar metadata for the Codex plugin system.
+# Other runtimes (Gemini, Claude) use different discovery mechanisms.
 interface:
   display_name: "Orchestrated Delivery"
   short_description: "Guide complex goals through requirements, gates, delegation, and review"
   default_prompt: "Use $orchestrated-delivery to run a documented workflow for this complex goal."
+

@@ -2,6 +2,17 @@
 
 Read this file when drafting or updating phase documents.
 
+## Contents
+
+- Compact writing rules
+- `01-problem-goal-requirements.md`
+- `02-solution-options.md`
+- `03-acceptance-criteria.md`
+- `04-prototype-notes.md`
+- `05-execution-paths.md`
+- `06-execution-log.md`
+- `07-delivery-report.md`
+
 ## Compact Writing Rules
 
 - Omit empty sections.
@@ -70,6 +81,11 @@ Read this file when drafting or updating phase documents.
 
 ## Existing Or Reusable Solutions Checked
 
+## Delegation Record
+- Mode:
+- Independent research or design delegate:
+- Lite skip reason, if skipped:
+
 ## Option A
 - Description:
 - Benefits:
@@ -135,6 +151,8 @@ Read this file when drafting or updating phase documents.
 
 ## Does Not Validate
 
+## Verification Performed
+
 ## User Feedback
 
 ## Impact On Prior Documents
@@ -158,6 +176,7 @@ Read this file when drafting or updating phase documents.
   - Covers:
   - Owner:
   - Scope:
+  - Non-scope:
   - Output:
   - Verification:
   - Review:

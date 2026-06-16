@@ -6,6 +6,15 @@ A brief is the task message sent to another agent. It must be self-contained bec
 
 A handoff is the delegate's return report to the lead agent.
 
+## Contents
+
+- Common brief fields
+- Research or design brief
+- Prototype brief
+- Execution brief
+- Review brief
+- Handoff checklist
+
 ## Common Brief Fields
 
 Include:

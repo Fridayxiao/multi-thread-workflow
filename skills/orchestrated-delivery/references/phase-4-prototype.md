@@ -25,6 +25,18 @@ Use this phase when:
 
 Create `04-prototype-notes.md` when this phase is used. Use `template-documents.md`.
 
+## Output Contract (Required Fields)
+
+`04-prototype-notes.md` must include:
+
+- prototype purpose;
+- output produced and how to view or use it;
+- what the prototype validates;
+- what it does not validate;
+- verification performed;
+- user feedback, or the user's explicit agreement to continue without prototype feedback;
+- impact on requirements, solution, and acceptance criteria.
+
 ## Gate
 
 Proceed only when:

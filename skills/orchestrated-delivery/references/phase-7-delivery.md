@@ -19,6 +19,19 @@ Report what was delivered, how it maps to acceptance criteria, what was verified
 
 Create or update `07-delivery-report.md`. Use `template-documents.md`.
 
+## Output Contract (Required Fields)
+
+`07-delivery-report.md` must include:
+
+- summary of delivered work;
+- acceptance criteria results mapped to `AC-*` IDs with evidence;
+- verification performed;
+- review summary;
+- known limitations and residual risks;
+- user acceptance steps;
+- final document consistency check;
+- final user acceptance status or rework feedback.
+
 ## Gate
 
 The workflow is complete only when the user accepts the result or gives rework feedback.
